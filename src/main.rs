@@ -28,7 +28,8 @@ fn evaluate(input: String)
     let split = input
         .split(|c: char| {c.is_whitespace()})
         .map(get_token)
-        .filter(Result::is_ok);
+        .filter(Result::is_ok)
+        .map(Result::unwrap);
     let mut token = Vec::new();
-    for chunk in split {token.push(chunk.unwrap());}
+    for chunk in split {token.push(chunk);}
 }
