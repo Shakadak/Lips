@@ -36,5 +36,6 @@ fn evaluate(input: String) -> Vec<Token>
         .split(|c: char| {c.is_whitespace()})
         .map(get_token)
         .filter(Result::is_ok)
-        .map(Result::unwrap).collect()
+        .map(Result::unwrap)
+        .collect()
 }
