@@ -5,3 +5,4 @@ version = "0.0.1"
 authors = ["Shakadak <nathanael.pineau@gmail.com>"]
 
 [dependencies.readline]
+git = "https://github.com/GBGamer/readline.git"
