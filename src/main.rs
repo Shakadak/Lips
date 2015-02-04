@@ -16,20 +16,25 @@ fn main()
             Ok(input)   =>
             {
                 add_history(input.as_slice());
-                evaluate(input);
+                for token in evaluate(input)
+                {
+                    match token
+                    {
+                        Token::Literal(x)   =>  println!("      Literal({})", x),
+                        Token::Operator(_)  =>  println!("      Operator")
+                    }
+                }
             },
             Err(_)      => break,
         }
     }
 }
 
-fn evaluate(input: String)
+fn evaluate(input: String) -> Vec<Token>
 {
-    let split = input
+    input
         .split(|c: char| {c.is_whitespace()})
         .map(get_token)
         .filter(Result::is_ok)
-        .map(Result::unwrap);
-    let mut token = Vec::new();
-    for chunk in split {token.push(chunk);}
+        .map(Result::unwrap).collect()
 }
