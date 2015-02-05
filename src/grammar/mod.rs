@@ -1,4 +1,5 @@
 use std::str::FromStr;
+use std::fmt;
 
 pub enum Operator
 {
@@ -24,6 +25,26 @@ pub enum Expression
             Box<Expression>,
             Box<Expression>
         )
+}
+
+impl fmt::Debug for Operator
+{
+    fn  fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+    {
+        write!
+            (
+                f,
+                "{}",
+                match *self
+                {
+                    Operator::Plus      =>  "+",
+                    Operator::Minus     =>  "-",
+                    Operator::Asterisk  =>  "*",
+                    Operator::Slash     =>  "/",
+                    Operator::Percent   =>  "%"
+                }
+            )
+    }
 }
 
 pub fn get_token(input: &str) -> Result<Token, &str>

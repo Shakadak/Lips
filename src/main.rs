@@ -20,8 +20,8 @@ fn main()
                 {
                     match token
                     {
-                        Token::Literal(x)   =>  println!("      Literal({})", x),
-                        Token::Operator(_)  =>  println!("      Operator")
+                        Token::Literal(num) =>  println!("      Literal({})", num),
+                        Token::Operator(op) =>  println!("      Operator({:?})", op)
                     }
                 }
             },
@@ -33,7 +33,7 @@ fn main()
 fn evaluate(input: String) -> Vec<Token>
 {
     input
-        .split(|c: char| {c.is_whitespace()})
+        .split(CharExt::is_whitespace)
         .map(get_token)
         .filter(Result::is_ok)
         .map(Result::unwrap)
