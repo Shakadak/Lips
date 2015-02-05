@@ -18,11 +18,7 @@ fn main()
                 add_history(input.as_slice());
                 for token in evaluate(input)
                 {
-                    match token
-                    {
-                        Token::Literal(num) =>  println!("      Literal({})", num),
-                        Token::Operator(op) =>  println!("      Operator({:?})", op)
-                    }
+                    println!("      {:?}", token);
                 }
             },
             Err(_)      => break,

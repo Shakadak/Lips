@@ -47,6 +47,23 @@ impl fmt::Debug for Operator
     }
 }
 
+impl fmt::Debug for Token
+{
+    fn  fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+    {
+        write!
+            (
+                f,
+                "{}",
+                match *self
+                {
+                    Token::Operator(ref op)     =>  format!("Operator({:?})", op),
+                    Token::Literal(num)     =>  format!("Literal({})", num)
+                }
+            )
+    }
+}
+
 pub fn get_token(input: &str) -> Result<Token, &str>
 {
     match input
