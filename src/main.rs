@@ -13,7 +13,7 @@ fn main()
         let result = readline("Kiss! ");
         match result
         {
-            Ok(input)   =>
+            Some(input)     =>
             {
                 add_history(input.as_slice());
                 for token in evaluate(input)
@@ -21,7 +21,7 @@ fn main()
                     println!("      {:?}", token);
                 }
             },
-            Err(_)      => break,
+            None            => break,
         }
     }
 }

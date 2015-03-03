@@ -1,0 +1,20 @@
+[root]
+name = "Lips"
+version = "0.0.1"
+dependencies = [
+ "readline 0.0.6 (git+https://github.com/GBGamer/readline.git)",
+]
+
+[[package]]
+name = "readline"
+version = "0.0.6"
+source = "git+https://github.com/GBGamer/readline.git#47d96cb3364bce416c9cb84eaec15d82b97bcf48"
+dependencies = [
+ "readline-sys 0.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "readline-sys"
+version = "0.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
