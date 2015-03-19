@@ -64,7 +64,7 @@ impl fmt::Debug for Token
     }
 }
 
-pub fn get_token(input: &str) -> Result<Token, &str>
+pub fn assign_token(input: &str) -> Result<Token, String>
 {
     match input
     {
@@ -76,7 +76,7 @@ pub fn get_token(input: &str) -> Result<Token, &str>
         input       =>  match FromStr::from_str(input)
         {
             Ok(number)      =>  Ok(Token::Literal(number)),
-            Err(_)          =>  Err(input)
+            Err(_)          =>  Err(format!("Error: unassignable token ({})", input))
         }
     }
 }

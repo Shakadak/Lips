@@ -16,22 +16,34 @@ fn main()
             Some(input)     =>
             {
                 add_history(input.as_slice());
-                for token in evaluate(input)
+                for token in tokenize(input)
                 {
-                    println!("      {:?}", token);
+                    match token
+                    {
+                        Ok(token)   =>
+                        {
+                            println!("      {:?}", token)
+                        }
+                        Err(error)   =>
+                        {
+                            println!("      {}", error);
+                            break
+                        },
+                    }
                 }
             },
-            None            => break,
+            None            =>
+            {
+                break
+            },
         }
     }
 }
 
-fn evaluate(input: String) -> Vec<Token>
+fn tokenize(input: String) -> Vec<Result<Token, String>>
 {
     input
         .split(CharExt::is_whitespace)
-        .map(get_token)
-        .filter(Result::is_ok)
-        .map(Result::unwrap)
+        .map(assign_token)
         .collect()
 }
