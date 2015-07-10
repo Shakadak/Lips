@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>~/Development/git/Lips/src/main.rs.html</title>
+<meta name="Generator" content="Vim/7.4">
+<meta name="plugin-version" content="vim7.4_v1">
+<meta name="syntax" content="rust">
+<meta name="settings" content="number_lines,use_css,pre_wrap,no_foldcolumn,expand_tabs,line_ids,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #ffffff; }
+body { font-family: monospace; color: #000000; background-color: #ffffff; }
+* { font-size: 1em; }
+.Constant { color: #ff6060; }
+.Parens { color: #ffffff; }
+.Coma { color: #ffffff; }
+.Special { color: #ff40ff; }
+.Braces { color: #ffffff; font-weight: bold; }
+.LineNr { color: #ffff00; }
+.Identifier { color: #00ffff; }
+.Statement { color: #ffff00; }
+.PreProc { color: #ff40ff; }
+.Semicolon { color: #ffffff; }
+.Type { color: #00ff00; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+-->
+</script>
+</head>
+<body onload='JumpToLine();'>
+<pre id='vimCodeElement'>
+<span id="L1" class="LineNr"> 1 </span><span class="Statement">extern</span> <span class="Statement">crate</span> <span class="Identifier">readline</span><span class="Semicolon">;</span>
+<span id="L2" class="LineNr"> 2 </span>
+<span id="L3" class="LineNr"> 3 </span><span class="Statement">use</span> <span class="PreProc">readline</span><span class="Special">::</span><span class="Braces">{</span>readline<span class="Coma">,</span> add_history<span class="Braces">}</span><span class="Semicolon">;</span>
+<span id="L4" class="LineNr"> 4 </span><span class="Statement">use</span> <span class="PreProc">grammar</span><span class="Special">::</span><span class="Type">*</span><span class="Semicolon">;</span>
+<span id="L5" class="LineNr"> 5 </span><span class="Statement">use</span> <span class="PreProc">std</span><span class="Special">::</span><span class="PreProc">result</span><span class="Special">::</span><span class="Type">Result</span><span class="Semicolon">;</span>
+<span id="L6" class="LineNr"> 6 </span>
+<span id="L7" class="LineNr"> 7 </span><span class="Statement">mod</span> <span class="Identifier">grammar</span><span class="Semicolon">;</span>
+<span id="L8" class="LineNr"> 8 </span>
+<span id="L9" class="LineNr"> 9 </span><span class="Statement">fn</span> <span class="Identifier">main</span><span class="Parens">()</span> <span class="Braces">{</span>
+<span id="L10" class="LineNr">10 </span>    <span class="Statement">loop</span> <span class="Braces">{</span>
+<span id="L11" class="LineNr">11 </span>        <span class="Statement">let</span> result <span class="Statement">=</span> <span class="Identifier">readline</span><span class="Parens">(</span><span class="Constant">&quot;Kiss! &quot;</span><span class="Parens">)</span><span class="Semicolon">;</span>
+<span id="L12" class="LineNr">12 </span>        <span class="Statement">match</span> result <span class="Braces">{</span>
+<span id="L13" class="LineNr">13 </span>            <span class="Constant">Some</span><span class="Parens">(</span>input<span class="Parens">)</span>
+<span id="L14" class="LineNr">14 </span>                <span class="Statement">=&gt;</span> <span class="Braces">{</span>
+<span id="L15" class="LineNr">15 </span>                    <span class="Identifier">add_history</span><span class="Parens">(</span>input.<span class="Identifier">as_slice</span><span class="Parens">())</span><span class="Semicolon">;</span>
+<span id="L16" class="LineNr">16 </span>                    <span class="Statement">for</span> token <span class="Statement">in</span> <span class="Identifier">tokenize</span><span class="Parens">(</span>input<span class="Parens">)</span> <span class="Braces">{</span>
+<span id="L17" class="LineNr">17 </span>                        <span class="Statement">match</span> token <span class="Braces">{</span>
+<span id="L18" class="LineNr">18 </span>                            <span class="Constant">Ok</span><span class="Parens">(</span>token<span class="Parens">)</span>
+<span id="L19" class="LineNr">19 </span>                                <span class="Statement">=&gt;</span> <span class="Braces">{</span>
+<span id="L20" class="LineNr">20 </span>                                    <span class="PreProc">println!</span><span class="Parens">(</span><span class="Constant">&quot;      {:?}&quot;</span><span class="Coma">,</span> token<span class="Parens">)</span> <span class="Braces">}</span>
+<span id="L21" class="LineNr">21 </span>                            <span class="Constant">Err</span><span class="Parens">(</span>error<span class="Parens">)</span>
+<span id="L22" class="LineNr">22 </span>                                <span class="Statement">=&gt;</span> <span class="Braces">{</span>
+<span id="L23" class="LineNr">23 </span>                                    <span class="PreProc">println!</span><span class="Parens">(</span><span class="Constant">&quot;      {}&quot;</span><span class="Coma">,</span> error<span class="Parens">)</span><span class="Semicolon">;</span>
+<span id="L24" class="LineNr">24 </span>                                    <span class="Statement">break</span> <span class="Braces">}</span><span class="Coma">,</span><span class="Braces">}}}</span>
+<span id="L25" class="LineNr">25 </span>            <span class="Constant">None</span>
+<span id="L26" class="LineNr">26 </span>                <span class="Statement">=&gt;</span> <span class="Braces">{</span>
+<span id="L27" class="LineNr">27 </span>                    <span class="Statement">break</span> <span class="Braces">}}}}</span>
+<span id="L28" class="LineNr">28 </span>
+<span id="L29" class="LineNr">29 </span><span class="Statement">fn</span> <span class="Identifier">tokenize</span><span class="Parens">(</span>input: <span class="Type">String</span><span class="Parens">)</span> <span class="Statement">-&gt;</span> <span class="Type">Vec</span><span class="Statement">&lt;</span><span class="Type">Result</span><span class="Statement">&lt;</span>Token<span class="Coma">,</span> <span class="Type">String</span><span class="Statement">&gt;&gt;</span> <span class="Braces">{</span>
+<span id="L30" class="LineNr">30 </span>    input
+<span id="L31" class="LineNr">31 </span>        .<span class="Identifier">split</span><span class="Parens">(</span><span class="PreProc">CharExt</span><span class="Special">::</span>is_whitespace<span class="Parens">)</span>
+<span id="L32" class="LineNr">32 </span>        .<span class="Identifier">map</span><span class="Parens">(</span>assign_token<span class="Parens">)</span>
+<span id="L33" class="LineNr">33 </span>        .<span class="Identifier">collect</span><span class="Parens">()</span> <span class="Braces">}</span>
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
